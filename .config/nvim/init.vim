@@ -76,6 +76,8 @@ Plug 'williamboman/nvim-lsp-installer'
 " Plug 'folke/trouble.nvim'
 Plug 'onsails/lspkind-nvim'
 Plug 'creativenull/diagnosticls-configs-nvim'
+" Global Search
+Plug 'dyng/ctrlsf.vim'
 
 " Prettier
 Plug 'sbdchd/neoformat'
@@ -375,7 +377,8 @@ require('telescope').setup {
 require('telescope').load_extension('fzf')
 require("telescope").load_extension "file_browser"
 EOF
-nnoremap <leader>ps :lua require('telescope.builtin').grep_string( { search = vim.fn.input("Grep for > ") } )<cr>
+" nnoremap <leader>ps :lua require('telescope.builtin').grep_string( { search = vim.fn.input("Grep for > ") } )<cr>
+nnoremap <leader>ps :CtrlSF <cr>
 nnoremap <leader>ff :lua require'telescope.builtin'.find_files{ hidden = true }<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 " nnoremap <Leader>fs :lua require'telescope.builtin'.file_browser{ cwd = vim.fn.expand('%:p:h') }<cr>
