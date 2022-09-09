@@ -470,7 +470,7 @@ EOF
 
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> gh    <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gca   <cmd>:Telescope lsp_code_actions<CR>
+" nnoremap <silent> gca   <cmd>:Telescope lsp_code_actions<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
@@ -478,6 +478,19 @@ nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
 " nnoremap <silent><leader>fo <cmd>lua vim.lsp.buf.format { async = true }<CR>
 
 " }}}
+
+lua << EOF
+vim.api.nvim_create_autocmd("FileType", {
+    callback = function()
+        local bufnr = vim.fn.bufnr('%')
+        vim.keymap.set("n", "e", function()
+            vim.api.nvim_command([[execute "normal! \<cr>"]])
+            vim.api.nvim_command(bufnr .. 'bd')
+        end, { buffer = bufnr })
+    end,
+    pattern = "qf",
+})
+EOF
 
 " 'williamboman/nvim-lsp-installer' {{{
 lua << EOF
