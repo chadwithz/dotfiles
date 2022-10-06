@@ -90,6 +90,8 @@ Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'David-Kunz/cmp-npm'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
 
 " File Management
 Plug 'nvim-lua/popup.nvim'
@@ -100,6 +102,7 @@ Plug 'nvim-telescope/telescope-file-browser.nvim'
 Plug 'sudormrfbin/cheatsheet.nvim'
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'ThePrimeagen/harpoon'
+Plug 'windwp/nvim-ts-autotag'
 
 " TEMPORARY FOR RECORDING"
 " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -616,6 +619,9 @@ require'nvim-treesitter.configs'.setup {
     enable = false
   },
   context_commentstring = {
+    enable = true
+  },
+  autotag = {
     enable = true
   }
 }
