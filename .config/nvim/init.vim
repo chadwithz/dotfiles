@@ -6,9 +6,6 @@
 " ██║██║ ╚████║██║   ██║██╗ ╚████╔╝ ██║██║ ╚═╝ ██║
 " ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
 " 
-"         @elijahmanor
-
-" Sets {{{
 set exrc
 set relativenumber
 set nu
@@ -27,7 +24,7 @@ set nobackup
 set undodir=~/.vim/undodir
 set undofile
 set incsearch
-set termguicolors
+" set termguicolors
 set scrolloff=2
 set noshowmode
 set completeopt=menu,menuone,noselect
@@ -39,219 +36,62 @@ set clipboard+=unnamedplus " Copy paste between vim and everything else
 set nojoinspaces " don't autoinsert two spaces after '.', '?', '!' for join command
 set showcmd " extra info at end of command line
 set wildignore+=*/node_modules/**
+set tabstop=4
+set shiftwidth=4
+set expandtab
 filetype plugin indent on
-
-" folding
-" set foldmethod=syntax "syntax highlighting items specify folds  
-" set foldcolumn=1 "defines 1 col at window left, to indicate folding  
-" let javaScript_fold=1 "activate folding by JS syntax  
-" set foldlevelstart=99 "start file with all folds opened
 
 set foldlevel=20
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-
-" for demo
-" set expandtab
-" set tabstop=2
-" set softtabstop=2
-" set shiftwidth=2
-" set smartindent
+set completeopt=menu,menuone,noselect
 
 " attempt to speed-up vim
 set ttyfast
 set lazyredraw
 " }}}
 
-" Plugins {{{
 call plug#begin('~/.vim/plugged')
-" PlugInstall PlugClean PlugUpdate
+" Theme
+Plug 'morhetz/gruvbox'
+Plug 'lewis6991/gitsigns.nvim'
+Plug 'xiyaowong/nvim-transparent'
 
-" Dashboard
-" Plug 'glepnir/dashboard-nvim'
-
-" Language Server Protocol
+" LSP
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
-" Plug 'folke/trouble.nvim'
-Plug 'onsails/lspkind-nvim'
-Plug 'creativenull/diagnosticls-configs-nvim'
-" Global Search
-Plug 'dyng/ctrlsf.vim'
-
-" Prettier
-Plug 'sbdchd/neoformat'
-
-" Completion
-Plug 'hrsh7th/nvim-cmp'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'David-Kunz/cmp-npm'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'kristijanhusak/vim-js-file-import', {'do': 'npm install'}
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 
-" File Management
-Plug 'nvim-lua/popup.nvim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
-Plug 'nvim-telescope/telescope-file-browser.nvim'
-Plug 'sudormrfbin/cheatsheet.nvim'
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'ThePrimeagen/harpoon'
-Plug 'windwp/nvim-ts-autotag'
-
-" TEMPORARY FOR RECORDING"
-" Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-" Plug 'junegunn/fzf.vim'
-" Plug 'windwp/nvim-spectre'
-" nnoremap <leader>S :lua require('spectre').open()<CR>
-
-" Custom Text Objects
-Plug 'michaeljsmith/vim-indent-object' " gcii gcaI
-Plug 'kana/vim-textobj-user'
-
-" Custom Motions
-Plug 'christoomey/vim-sort-motion' " gsip gsii
-Plug 'tommcdo/vim-exchange' " cxiw ., cxx ., cxc
-
-" https://github.com/nvim-treesitter/nvim-treesitter/issues/1111
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'JoosepAlviste/nvim-ts-context-commentstring'
-Plug 'MaxMEllon/vim-jsx-pretty' " fix indentation in jsx until treesitter can
-Plug 'jxnblk/vim-mdx-js'
-" Plug 'code-biscuits/nvim-biscuits'
-
-" Status Line
-Plug 'hoob3rt/lualine.nvim'
+" Icons
 Plug 'kyazdani42/nvim-web-devicons'
 
-" tmux plugins
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'preservim/vimux'
+" File management
+Plug 'ThePrimeagen/harpoon'
+Plug 'kyazdani42/nvim-tree.lua'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
-" tpope plugins
-Plug 'tpope/vim-projectionist'
-Plug 'tpope/vim-unimpaired' " helpful shorthand like [b ]b
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-sleuth'
-Plug 'tpope/vim-fugitive'
-
-Plug 'editorconfig/editorconfig-vim'
-" Plug 'APZelos/blamer.nvim'
-Plug 'lewis6991/gitsigns.nvim'
-Plug 'karb94/neoscroll.nvim'
-Plug 'vimwiki/vimwiki', { 'on': ['VimwikiIndex'] }
-Plug 'norcalli/nvim-colorizer.lua', { 'branch': 'color-editor' }
-Plug 'machakann/vim-highlightedyank'
-" Plug 'folke/which-key.nvim'
-Plug 'wesQ3/vim-windowswap' " <leader>ww
-Plug 'justinmk/vim-sneak'
-" Plug 'tweekmonster/startuptime.vim'
-Plug 'dstein64/vim-startuptime'
-Plug 'akinsho/nvim-bufferline.lua'
+" Tools
 Plug 'windwp/nvim-autopairs'
-Plug 'miyakogi/conoline.vim'
-" Plug 'github/copilot.vim'
-Plug 'yamatsum/nvim-cursorline'
-Plug 'mattn/emmet-vim'
-Plug 'GustavoKatel/sidebar.nvim'
-
-Plug 'folke/zen-mode.nvim'
-Plug 'junegunn/limelight.vim'
-Plug 'gelguy/wilder.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'stevearc/dressing.nvim'
-
-Plug 'vim-pandoc/vim-pandoc'
-Plug 'vim-pandoc/vim-pandoc-syntax'
-
-" Themes
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'morhetz/gruvbox'
-" Plug 'npxbr/gruvbox.nvim'
-" Plug 'tjdevries/colorbuddy.vim'
-" Plug 'Th3Whit3Wolf/onebuddy'
-" Plug 'projekt0n/github-nvim-theme'
-
-Plug 'elijahmanor/export-to-vscode.nvim'
+Plug 'tpope/vim-commentary'
+Plug 'windwp/nvim-ts-autotag'
+Plug 'APZelos/blamer.nvim'
 
 call plug#end()
-" }}}
 
-" Plug 'folke/zen-mode.nvim'
-lua << EOF
-  require("zen-mode").setup {
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
-  }
-EOF
-
-" Plug 'gelguy/wilder.nvim' {{{
-call wilder#setup({'modes': [':', '/', '?']})
-" }}}
-
-" Plug 'GustavoKatel/sidebar.nvim' {{{
-lua << EOF
-require("sidebar-nvim").setup({})
--- require("sidebar-nvim").setup({
---     disable_default_keybindings = 0,
---     bindings = nil,
---     open = false,
---     side = "left",
---     initial_width = 35,
---     update_interval = 1000,
---     sections = { "datetime", "git-status", "lsp-diagnostics" },
---     section_separator = "-----",
---     docker = {
---         attach_shell = "/bin/sh", show_all = true, interval = 5000,
---     },
---     datetime = { format = "%a %b %d, %H:%M", clocks = { { name = "local" } } },
---     todos = { ignored_paths = { "~" } }
--- })
-EOF
-" nnoremap <leader>sb <cmd>SidebarNvimToggle<cr>
-" }}}
-
-" export-to-vscode {{{
-" nnoremap <silent> <leader>code <cmd>lua require('export-to-vscode').launch()<cr>
-lua << EOF
---vim.api.nvim_set_keymap(
---  'n',
---  '<leader>code',
---  '<cmd>lua require("export-to-vscode").launch()<cr>',
---  { noremap = true, silent = true }
---)
-EOF
-" }}}
-
-" Colors {{{
 if (has("termguicolors"))
   set termguicolors " enable true colors support
 endif
-let g:dracula_colorterm = 0
-let g:dracula_italic = 1
+
 colorscheme gruvbox
-" set background=dark " light or dark
-" colorscheme onebuddy
-"
-
-lua << EOF
---require('github-theme').setup({
---  theme_style = "dark_default", -- dark/dark_default/dimmed/light/light_default
---  function_style = "italic",
---  sidebars = {"qf", "vista_kind", "terminal", "packer"},
---  -- Change the "hint" color to the "orange" color, and make the "error" color bright red
---  colors = {hint = "orange", error = "#ff0000"}
---})
-EOF
-
 highlight Cursor guifg=#f00 guibg=#657b83
 highlight Comment cterm=italic gui=italic
 
@@ -260,228 +100,69 @@ set textwidth=80
 set colorcolumn=+1
 set colorcolumn=80
 highlight ColorColumn guibg=#181818
-" }}}
 
 " Leader {{{
 let mapleader = " "
 "}}}
 
-" justinmk/vim-sneak {{{
-let g:sneak#label = 1
+" ThePrimeagen/harpoon {{{
+nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
+nnoremap <leader>, :lua require("harpoon.ui").toggle_quick_menu()<CR>
+nnoremap <leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
+nnoremap <leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
+nnoremap <leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
+nnoremap <leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
 " }}}
 
-" Plug 'onsails/lspkind-nvim' {{{
+" language servers
 lua << EOF
-require('lspkind').init({})
-EOF
-" }}}
+require'lspconfig'.tsserver.setup{}
+require'lspconfig'.golangci_lint_ls.setup{}
+require'lspconfig'.gopls.setup{}
+-- Mappings.
+local opts = { noremap=true, silent=true }
 
-" Plug 'windwp/nvim-autopairs' {{{
-lua << EOF
-require('nvim-autopairs').setup()
-EOF
-" }}}
-
-" 'akinsho/nvim-bufferline.lua' {{{
-lua << EOF
-vim.api.nvim_exec([[let $KITTY_WINDOW_ID=0]], true)
-require("bufferline").setup{
-  highlights = {
-    fill = {
-      bg = "#282828"
-    },
-    separator_selected = {
-      fg = "#282828"
-    },
-    separator_visible = {
-      fg = "#282828"
-    },
-    separator = {
-      fg = "#282828"
-    }
-  },
-  options = {
-    modified_icon = "●",
-    left_trunc_marker = "",
-    right_trunc_marker = "",
-    max_name_length = 25,
-    max_prefix_length = 25,
-    enforce_regular_tabs = false,
-    view = "multiwindow",
-    show_buffer_close_icons = true,
-    show_close_icon = false,
-    separator_style = "slant",
-    diagnostics = "nvim_lsp",
-    diagnostics_update_in_insert = false,
-    diagnostics_indicator = function(count, level, diagnostics_dict, context)
-      return "("..count..")"
-    end,
-    offsets = {
-      {
-        filetype = "coc-explorer",
-        text = "File Explorer",
-        highlight = "Directory",
-        text_align = "center"
-      }
-    }
-  }
-}
-EOF
-nnoremap <silent> gb :BufferLinePick<CR>
-" }}}
-
-" Plug 'APZelos/blamer.nvim' {{{
-" let g:blamer_enabled = 1
-" nnoremap <silent> <leader>tb :BlamerToggle<CR>
-" }}}
-
-" norcalli/nvim-colorizer.lua {{{
-lua require'colorizer'.setup()
-" }}}
-
-" lewis6991/gitsigns.nvim {{{
-lua << EOF
-  require('gitsigns').setup({})
-EOF
-" }}}
-
-" Plug 'karb94/neoscroll.nvim'{{{
-lua require('neoscroll').setup()
-" }}}
-
-" nvim-telescope/telescope.nvim {{{
-lua << EOF
-require('telescope').setup {
-  defaults = {
-    file_ignore_patterns = { "yarn.lock" }
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = false,
-      override_file_sorter = true,
-      case_mode = "smart_case"
-    },
-  },
-  pickers = {
-    buffers = {
-      show_all_buffers = true,
-      sort_lastused = true,
-      -- theme = "dropdown",
-      -- previewer = false,
-      mappings = {
-        i = {
-          ["<M-d>"] = "delete_buffer",
+-- this part is telling Neovim to use the lsp server
+local servers = { 'tsserver','golangci_lint_ls', 'gopls' }
+for _, lsp in pairs(servers) do
+    require('lspconfig')[lsp].setup {
+        on_attach = on_attach,
+        flags = {
+          debounce_text_changes = 150,
         }
-      }
     }
-  }
-}
-require('telescope').load_extension('fzf')
-require("telescope").load_extension "file_browser"
-EOF
-" nnoremap <leader>ps :lua require('telescope.builtin').grep_string( { search = vim.fn.input("Grep for > ") } )<cr>
-nnoremap <leader>ps :CtrlSF <cr>
-nnoremap <leader>ff :lua require'telescope.builtin'.find_files{ hidden = true }<cr>
-nnoremap <leader>fb <cmd>Telescope buffers<cr>
-" nnoremap <Leader>fs :lua require'telescope.builtin'.file_browser{ cwd = vim.fn.expand('%:p:h') }<cr>
-nnoremap <leader>fs <cmd>lua require 'telescope'.extensions.file_browser.file_browser( { path = vim.fn.expand('%:p:h') } )<CR>
-nnoremap <Leader>fc :lua require'telescope.builtin'.git_status{}<cr>
-nnoremap <Leader>cb :lua require'telescope.builtin'.git_branches{}<cr>
-nnoremap <leader>fr :lua require'telescope.builtin'.resume{}<CR>
-nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep( { file_ignore_patterns = { '**/*.spec.js' } } )<cr>
-" nnoremap <leader>fgi <cmd>lua require('telescope.builtin').live_grep( { file_ignore_patterns = { vim.fn.input("Ignore pattern > ") } } )<cr>
-nnoremap <leader>fgd :lua require'telescope.builtin'.live_grep{ search_dirs = { 'slices/admin' } }
-
-nnoremap <leader>cheat :Cheatsheet<cr>
-" nnoremap <leader>fh <cmd>Telescope help_tags<cr>
-"}}}
-
-" neovim/nvim-lspconfig {{{
-" npm i -g typescript typescript-language-server
-lua << EOF
-local util = require "lspconfig/util"
-require 'lspconfig'.tsserver.setup{
-    on_attach = function(client)
-        client.server_capabilities.documentFormattingProvider = false
-    end,
-    root_dir = util.root_pattern(".git", "tsconfig.json", "jsconfig.json"),
-    --[=====[ 
-    handlers = {
-      ["textDocument/publishDiagnostics"] = function(_, _, params, client_id, _, config)
-        local ignore_codes = { 80001, 7016 };
-        if params.diagnostics ~= nil then
-          local idx = 1
-          while idx <= #params.diagnostics do
-            if vim.tbl_contains(ignore_codes, params.diagnostics[idx].code) then
-              table.remove(params.diagnostics, idx)
-            else
-              idx = idx + 1
-            end 
-          end
-        end
-        vim.lsp.diagnostic.on_publish_diagnostics(_, _, params, client_id, _, config)
-      end,
-    },
-    --]=====]
-}
-EOF
-
-lua << EOF
--- npm install -g diagnostic-languageserver eslint_d prettier_d_slim prettier
-local function on_attach(client)
-  print('Attached to ' .. client.name)
 end
-local dlsconfig = require 'diagnosticls-configs'
-dlsconfig.init {
-  default_config = false,
-  format = true,
-  on_attach = on_attach,
+
+local lspconfig = require 'lspconfig'
+local configs = require 'lspconfig/configs'
+
+if not configs.golangcilsp then
+ 	configs.golangcilsp = {
+		default_config = {
+			cmd = {'golangci-lint-langserver'},
+			root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
+			init_options = {
+					command = { "golangci-lint", "run", "--enable-all", "--disable", "lll", "--out-format", "json", "--issues-exit-code=1" };
+			}
+		};
+	}
+end
+lspconfig.golangci_lint_ls.setup {
+	filetypes = {'go','gomod'}
 }
-local eslint = require 'diagnosticls-configs.linters.eslint'
-local prettier = require 'diagnosticls-configs.formatters.prettier'
-prettier.requiredFiles = {
-    '.prettierrc',
-    '.prettierrc.json',
-    '.prettierrc.toml',
-    '.prettierrc.json',
-    '.prettierrc.yml',
-    '.prettierrc.yaml',
-    '.prettierrc.json5',
-    '.prettierrc.js',
-    '.prettierrc.cjs',
-    'prettier.config.js',
-    'prettier.config.cjs',
-  }
-dlsconfig.setup {
-  ['javascript'] = {
-    linter = eslint,
-    formatter = { prettier }
-  },
-  ['javascriptreact'] = {
-    linter = { eslint },
-    formatter = { prettier }
-  },
-  ['css'] = {
-    formatter = prettier
-  },
-  ['html'] = {
-    formatter = prettier
-  },
-}
+
+-- this is for diagnositcs signs on the line number column
+-- use this to beautify the plain E W signs to more fun ones
+-- !important nerdfonts needs to be setup for this to work in your terminal
+local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " } 
+for type, icon in pairs(signs) do
+    local hl = "DiagnosticSign" .. type
+    vim.fn.sign_define(hl, { text = icon, texthl= hl, numhl = hl })
+end
+
 EOF
 
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
-nnoremap <silent> gh    <cmd>lua vim.lsp.buf.hover()<CR>
-" nnoremap <silent> gca   <cmd>:Telescope lsp_code_actions<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
-" nnoremap <silent><leader>fo <cmd>lua vim.lsp.buf.format { async = true }<CR>
-
-" }}}
-
+" press e to select and close split window from lsp
 lua << EOF
 vim.api.nvim_create_autocmd("FileType", {
     callback = function()
@@ -493,121 +174,131 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
     pattern = "qf",
 })
-EOF
-
-" 'williamboman/nvim-lsp-installer' {{{
-lua << EOF
-local lsp_installer = require("nvim-lsp-installer")
-lsp_installer.on_server_ready(function(server)
-    local opts = {
-      capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
-    }
-    server:setup(opts)
-end)
-EOF
-" }}}
-
-" ThePrimeagen/harpoon {{{
-nnoremap <leader>a :lua require("harpoon.mark").add_file()<CR>
-nnoremap <leader>, :lua require("harpoon.ui").toggle_quick_menu()<CR>
-nnoremap <leader>1 :lua require("harpoon.ui").nav_file(1)<CR>
-nnoremap <leader>2 :lua require("harpoon.ui").nav_file(2)<CR>
-nnoremap <leader>3 :lua require("harpoon.ui").nav_file(3)<CR>
-nnoremap <leader>4 :lua require("harpoon.ui").nav_file(4)<CR>
-" }}}
-
-" folke/wich-key.nvim {{{
-lua << EOF
--- require("which-key").setup {}
-EOF
-" }}}
-
-" janko/vim-test {{{
-let test#strategy = "neovim"
-let test#neovim#term_position = "vertical"
-let g:test#javascript#runner = 'jest'
-" https://github.com/vim-test/vim-test/issues/272
-let g:root_markers = ['package.json', '.git/']
-function! s:RunVimTest(cmd)
-    " I guess this part could be replaced by projectionist#project_root
-    for marker in g:root_markers
-        let marker_file = findfile(marker, expand('%:p:h') . ';')
-        if strlen(marker_file) > 0
-            let g:test#project_root = fnamemodify(marker_file, ":p:h")
-            break
-        endif
-        let marker_dir = finddir(marker, expand('%:p:h') . ';')
-        if strlen(marker_dir) > 0
-            let g:test#project_root = fnamemodify(marker_dir, ":p:h")
-            break
-        endif
-    endfor
-
-    execute a:cmd
-endfunction
-nnoremap <leader>tt :call <SID>RunVimTest('TestNearest')<cr>
-nnoremap <leader>tl :call <SID>RunVimTest('TestLast')<cr>
-nnoremap <leader>tf :call <SID>RunVimTest('TestFile')<cr>
-nnoremap <leader>ts :call <SID>RunVimTest('TestSuite')<cr>
-nnoremap <leader>tv :call <SID>RunVimTest('TestVisit')<cr>
-"}}}
-
-" 'hrsh7th/nvim-cmp' {{{
-lua <<EOF
-  -- Setup nvim-cmp.
-  local cmp = require'cmp'
-
-  cmp.setup({
-    auto_select = false,
-    snippet = {
-      expand = function(args)
-        require('luasnip').lsp_expand(args.body)
-      end,
-    },
-    mapping = {
-      ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-      ['<C-f>'] = cmp.mapping.scroll_docs(4),
-      --['<C-Space>'] = cmp.mapping.complete(),
-      ['<C-x>'] = cmp.mapping.complete(),
-      ['<C-e>'] = cmp.mapping.close(),
-      --['<CR>'] = cmp.mapping.confirm({ select = false }),
-      ['<C-y>'] = cmp.mapping.confirm({
-        behavior = cmp.ConfirmBehavior.Insert,        
-        select = true
-      }),
-    },
-    sources = {
-      { name = 'nvim_lsp' },
-      -- For vsnip user.
-      -- { name = 'vsnip' },
-      -- For luasnip user.
-      { name = 'path' },
-      -- For ultisnips user.
-      -- { name = 'ultisnips' },
-      { name = 'luasnip' },
-      { name = 'buffer', keywork_length = 5 },
-      { name = 'npm', keyword_length = 4 },
-    },
-    formatting = {
-      -- format = require('lspkind').cmp_format {
-      --   with_text = true,
-      --   menu = {
-      --     buffer = "[buf]",
-      --     nvim_lsp = "[LSP]",
-      --     path = "[path]",
-      --     luasnip = "[snip]"
-      --   }
-      -- }
-    },
-    experimental = {
-      native_menu = false,
-      ghost_text = true
-    }
+vim.api.nvim_create_autocmd("BufEnter", {
+    nested = true,
+    callback = function()
+      if #vim.api.nvim_list_wins() == 1 and vim.api.nvim_buf_get_name(0):match("NvimTree_") ~= nil then
+        vim.cmd "quit"
+      end
+    end
   })
 EOF
 
+lua << EOF
+vim.g.loaded = 1
+vim.g.loaded_netrwPlugin = 1
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    adaptive_size = true,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+EOF
+
+" Auto Pairs
+lua << EOF
+require("nvim-autopairs").setup {}
+EOF
+
+lua << EOF
+require('gitsigns').setup()
+EOF
+
+" Autocomplete
+lua << EOF
+  -- Set up nvim-cmp.
+  local cmp = require'cmp'
+
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    window = {
+      -- completion = cmp.config.window.bordered(),
+      -- documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline({ '/', '?' }, {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = {
+      { name = 'buffer' }
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Set up lspconfig.
+  local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig')['tsserver'].setup {
+    capabilities = capabilities
+  }
+  require('lspconfig')['golangci_lint_ls'].setup {
+    capabilities = capabilities
+  }
+  -- If you want insert `(` after select function or method item
+  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+  local cmp = require('cmp')
+  cmp.event:on(
+    'confirm_done',
+    cmp_autopairs.on_confirm_done()
+  )
+EOF
+
 " nvim-treesitter {{{
-lua <<EOF
+lua << EOF
 require'nvim-treesitter.configs'.setup {
   ensure_installed = { 'html', 'javascript', 'typescript', 'tsx', 'css', 'json' },
   -- ensure_installed = "all", -- or maintained
@@ -618,149 +309,71 @@ require'nvim-treesitter.configs'.setup {
   indent = {
     enable = false
   },
-  context_commentstring = {
-    enable = true
-  },
   autotag = {
+    enable = true,
+  },
+  context_commentstring = {
     enable = true
   }
 }
 EOF
 " }}}
-
-" Plug 'hoob3rt/lualine.nvim' {{{
 lua << EOF
-require('plenary.reload').reload_module('lualine', true)
-require('lualine').setup({
-  options = {
-    theme = 'dracula',
-    disabled_types = { 'NvimTree' }
+require("mason").setup()
+require("mason-lspconfig").setup({
+	ensure_installed = { "tsserver", "golangci_lint_ls" }
+})
+EOF
+
+lua << EOF
+require("transparent").setup({
+  enable = true, -- boolean: enable transparent
+  extra_groups = { -- table/string: additional groups that should be cleared
+    -- In particular, when you set it to 'all', that means all available groups
+
+    -- example of akinsho/nvim-bufferline.lua
+    "BufferLineTabClose",
+    "BufferlineBufferSelected",
+    "BufferLineFill",
+    "BufferLineBackground",
+    "BufferLineSeparator",
+    "BufferLineIndicatorSelected",
   },
-  sections = {
-    lualine_x = {},
-    -- lualine_y = {},
-    -- lualine_z = {},
-  }
-})
-EOF
-" }}}
-
-" peitalin/vim-jsx-typescript {{{
-autocmd BufNewFile,BufRead *.tsx,*.jsx set filetype=typescriptreact
-" }}}
-
-" vimwiki/vimwiki {{{
-nnoremap <leader>vw :VimwikiIndex<CR>
-nnoremap <leader>tl :VimwikiToggleListItem<cr>
-"}}}
-" }}}
-
-" kyazdani42/nvim-tree.lua {{{
-lua << EOF
-require("nvim-tree").setup({
-	ignore_ft_on_setup  = { 'startify', 'dashboard' },
-	filters = {
-		custom = { '.git', 'node_modules', '.cache' }
-	},
-	git = {
-		ignore = true,
-	},
-	actions = {
-		open_file = {
-			quit_on_open = true
-		}
-	},
-	renderer = {
-		indent_markers = {
-			enable = true
-		},
-		highlight_git = true,
-		highlight_opened_files = "icon",
-		group_empty = true,
-	}
+  exclude = {}, -- table: groups you don't want to clear
 })
 EOF
 
+let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ]
+let g:nvim_tree_gitignore = 1
+let g:nvim_tree_quit_on_open = 1
+let g:nvim_tree_indent_markers = 1
+let g:nvim_tree_git_hl = 1
+let g:nvim_tree_highlight_opened_files = 1
+let g:nvim_tree_group_empty = 1
+
+" remaps
+
+nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <C-n> :NvimTreeToggle<CR>
 nnoremap <leader>r :NvimTreeRefresh<CR>
 nnoremap <leader>n :NvimTreeFindFile<CR>
-"}}}
-
-" tpope/vim-commentary {{{
-nnoremap <leader>/ :Commentary<CR>
-vnoremap <leader>/ :Commentary<CR>
-"}}}
-
-" Remaps {{{
-nnoremap <silent> <C-f> :silent !tmux neww tmux-sessionizer<CR>
-
-inoremap jj <ESC> " jj to Escape
-
-" zoom a vim pane, <C-w>= to re-balance
-nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
-nnoremap <leader>= :wincmd =<cr>
-
-nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-nnoremap <leader>sv :source $MYVIMRC<cr>
-
-" Turn on very magic mode for regular expressions
-" nnoremap / /\v
-" vnoremap / /\v
-
-" Escape terminal mode
-tnoremap <Esc> <C-\><C-n>
-
-nnoremap <leader><CR> :so ~/.config/nvim/init.vim<CR>
-vnoremap <leader>y "+y
-vnoremap J :m '>+1<CR>gv=gv
-vnoremap K :m '<-2<CR>gv=gv
-
-" resize current buffer by +/- 5 
-nnoremap <M-Right> :vertical resize -5<cr>
-nnoremap <M-Up> :resize +5<cr>
-nnoremap <M-Down> :resize -5<cr>
-nnoremap <M-Left> :vertical resize +5<cr>
-
-" toggle relativenumber
 nnoremap <leader>tn :set invrelativenumber<cr>
-
-" toggle word wrap
 nnoremap <leader>tw :set wrap!<cr>
 
-" clear and redraw screen, de-highlight, fix syntax highlighting
-nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
+" lsp
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gh    <cmd>lua vim.lsp.buf.hover()<CR>
+nnoremap <silent> gca   <cmd>lua vim.lsp.buf.code_action()<CR>
+nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
+nnoremap <silent><leader>fo <cmd>lua vim.lsp.buf.format { async = true }<CR>
 
-" nnoremap gp `[v`] " reselect pasted text
-
-nnoremap <leader>id :r!date -u +"\%Y-\%m-\%dT\%H:\%M:\%SZ"<CR>
-" nnoremap id "=strftime("%FT%T%z")<CR>P
-
-nnoremap <leader>x :!chmod +x %<cr>
-" }}}
-
-" Autocmd {{{
-set listchars=tab:▸\ ,trail:·,precedes:←,extends:→,eol:↲,nbsp:␣
-autocmd InsertEnter * set list
-autocmd VimEnter,BufEnter,InsertLeave * set nolist
-autocmd BufNewFile,BufRead *.md,*.mdx,*.markdown :set filetype=markdown
-" }}}
-
-" Abbreviations {{{
-iabbrev @@ emanor@planview.com
-" }}}
-
-" Snippets {{{
-" nnoremap ,desc :-1read $HOME/.config/snippets/describe.snip<CR>V2j=f"a
-" nnoremap ,it   :-1read $HOME/.config/snippets/it.snip<CR>V2j=f";i
-" nnoremap ,test :-1read $HOME/.config/snippets/test.snip<CR>V2j=f";i
-" }}}
-
-" https://vi.stackexchange.com/questions/3814/is-there-a-best-practice-to-fold-a-vimrc-file
-" vim: filetype=vim foldmethod=marker foldlevel=0 foldcolumn=3
-let g:neoformat_try_node_exe = 1
-
-nnoremap <silent><leader>fo <cmd>:Neoformat<CR>
-
-" autocmd BufWritePre *.js Neoformat
-" autocmd BufWritePre *.ts Neoformat
-" autocmd BufWritePre *.css Neoformat
+" Telescope
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
+nnoremap <leader>/ :Commentary<CR>
+vnoremap <leader>/ :Commentary<CR>
