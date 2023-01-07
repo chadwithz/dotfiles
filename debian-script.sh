@@ -10,10 +10,10 @@ echo "===================installing nodejs==================="
 wget https://nodejs.org/dist/v18.13.0/node-v18.13.0-linux-x64.tar.xz
 
 echo "===================unzipping nodejs==================="
-tar -xvf node-v16.15.0-linux-x64.tar.xz
+tar -xvf node-v18.13.0-linux-x64.tar.xz
 
 echo "===================moving nodejs to system==================="
-sudo cp -r node-v16.15.0-linux-x64/{bin,include,lib,share} /usr/
+sudo cp -r node-v18.13.0-linux-x64/{bin,include,lib,share} /usr/
 
 echo "===================checking if nodejs installed correctly==================="
 node --version
