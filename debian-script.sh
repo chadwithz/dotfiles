@@ -18,6 +18,12 @@ sudo cp -r node-v18.13.0-linux-x64/{bin,include,lib,share} /usr/
 echo "===================checking if nodejs installed correctly==================="
 node --version
 
+echo "========Resolving EACCES permissions errors when installing packages globally========"
+mkdir ~/.npm-global
+npm config set prefix '~/.npm-global'
+echo "export PATH=~/.npm-global/bin:$PATH" >> ~/.profile
+source ~/.profile
+
 echo "===================installinig docker==================="
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
