@@ -7,6 +7,7 @@
 " ╚═╝╚═╝  ╚═══╝╚═╝   ╚═╝╚═╝  ╚═══╝  ╚═╝╚═╝     ╚═╝
 " 
 set exrc
+set wrap
 set relativenumber
 set nu
 set nohlsearch
@@ -45,6 +46,7 @@ set foldlevel=20
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set completeopt=menu,menuone,noselect
+set autoindent expandtab tabstop=2 shiftwidth=2
 
 " attempt to speed-up vim
 set ttyfast
@@ -56,6 +58,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'xiyaowong/nvim-transparent'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " LSP
 Plug 'williamboman/mason.nvim'
@@ -84,6 +87,14 @@ Plug 'windwp/nvim-autopairs'
 Plug 'tpope/vim-commentary'
 Plug 'windwp/nvim-ts-autotag'
 Plug 'APZelos/blamer.nvim'
+Plug 'wakatime/vim-wakatime'
+Plug 'andweeb/presence.nvim'
+Plug 'heavenshell/vim-jsdoc', {
+  \ 'for': ['javascript', 'javascript.jsx','typescript'],
+  \ 'do': 'make install'
+\}
+Plug 'jose-elias-alvarez/null-ls.nvim'
+Plug 'MunifTanjim/prettier.nvim'
 
 call plug#end()
 
@@ -92,6 +103,7 @@ if (has("termguicolors"))
 endif
 
 colorscheme gruvbox
+" colorscheme tokyonight-storm
 highlight Cursor guifg=#f00 guibg=#657b83
 highlight Comment cterm=italic gui=italic
 
@@ -201,7 +213,7 @@ require("nvim-tree").setup({
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
 })
 EOF
@@ -368,7 +380,7 @@ nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
 nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <silent> gR    <cmd>lua vim.lsp.buf.rename()<CR>
-nnoremap <silent><leader>fo <cmd>lua vim.lsp.buf.format { async = true }<CR>
+nnoremap <silent><leader>fo :Prettier<CR>
 
 " Telescope
 nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
