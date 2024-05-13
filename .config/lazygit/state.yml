@@ -1,0 +1,20 @@
+lastupdatecheck: 0
+recentrepos:
+- /home/ihsankl/Documents/github/dungeon-crawler
+- /home/ihsankl/Documents/github/telegram-bot.git/new
+- /home/ihsankl/Documents/github/members-teams-service.git/dev
+- /home/ihsankl/Documents/github/telegram-bot.git/users
+- /home/ihsankl/Documents/github/telegram-bot.git/main
+- /home/ihsankl/Documents/github/shirt-designer.git/solid
+- /home/ihsankl/Documents/github/shirt-designer.git/main
+startuppopupversion: 5
+lastversion: 0.41.0
+customcommandshistory:
+- 'feat: add script'
+hidecommandlog: false
+ignorewhitespaceindiffview: false
+diffcontextsize: 3
+localbranchsortorder: recency
+remotebranchsortorder: alphabetical
+gitlogorder: topo-order
+gitlogshowgraph: always
